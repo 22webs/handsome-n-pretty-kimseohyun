@@ -1,0 +1,1 @@
+// export { ReactComponent as Ic} from "./icon/ic.svg";
