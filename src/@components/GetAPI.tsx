@@ -43,23 +43,34 @@ function GetAPI() {
   }, []);
 
   return (
-    <>
-      <p>나를 팔로우하는 사람</p>
-      {followers.map((x) => (
-        <h2 key={x}>{x}</h2>
-      ))}
-      <hr />
-      <p>내가 팔로잉하는 사람</p>
-      {followings.map((x) => (
-        <h2 key={x}>{x}</h2>
-      ))}
-      <hr />
-      <p>내가 팔로우하지만 나를 팔로잉하지 않는 사람</p>
-      {followings.length > 1 &&
-        followings.map((x) => {
-          if (!followers.includes(x)) return <h2 key={x}>{x}</h2>;
-        })}
-    </>
+    <div style={{ display: 'flex' }}>
+      <div>
+        나를 팔로우하는 사람
+        {followers.map((x) => (
+          <p key={x}>{x}</p>
+        ))}
+      </div>
+      <div>
+        내가 팔로잉하는 사람
+        {followings.map((x) => (
+          <h2 key={x}>{x}</h2>
+        ))}
+      </div>
+      <div>
+        내가 팔로우하지만 나를 팔로잉하지 않는 사람
+        {followings.length > 1 &&
+          followings.map((x) => {
+            if (!followers.includes(x)) return <h2 key={x}>{x}</h2>;
+          })}
+      </div>
+      <div>
+        나를 팔로잉하지만 내가 팔로우하지 않는 사람
+        {followers.length > 1 &&
+          followers.map((x) => {
+            if (!followings.includes(x)) return <h2 key={x}>{x}</h2>;
+          })}
+      </div>
+    </div>
   );
 }
 
