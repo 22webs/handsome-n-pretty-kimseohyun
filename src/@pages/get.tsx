@@ -1,3 +1,5 @@
+import GetAPI from '../@components/GetAPI';
+
 export default function Get() {
-  return <div>get</div>;
+  return <GetAPI />;
 }
