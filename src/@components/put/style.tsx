@@ -12,8 +12,6 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
 
-  width: 50rem;
-
   ${({ theme }) => theme.fonts.title}
 `;
 
@@ -30,4 +28,16 @@ export const NameBox = styled.p`
 
   background-color: ${({ theme }) => theme.colors.skyblue};
   ${({ theme }) => theme.fonts.text}
+`;
+
+export const Button = styled.button`
+  width: 20rem;
+  height: 5rem;
+
+  margin: 1rem;
+
+  border-radius: 10rem;
+
+  background-color: ${({ theme }) => theme.colors.blue};
+  ${({ theme }) => theme.fonts.button};
 `;

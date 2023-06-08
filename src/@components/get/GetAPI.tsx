@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/core';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { followersData, followingData } from '../../reocil/followingData';
 import { userData } from '../../reocil/user';
@@ -10,6 +11,7 @@ function GetAPI() {
   const [followers, setFollowers] = useRecoilState<string[]>(followersData);
   const [followings, setFollowings] = useRecoilState<string[]>(followingData);
   const userInfo = useRecoilValue<UserDataType>(userData);
+  const navigate = useNavigate();
 
   const func = async () => {
     const octokit = new Octokit({
@@ -49,6 +51,10 @@ function GetAPI() {
     func();
   }, []);
 
+  const handle_moveToFollow = () => {
+    navigate('/put');
+  };
+
   return (
     <St.GetWrapper>
       <St.FollowerWrapper>
@@ -77,6 +83,7 @@ function GetAPI() {
             if (!followings.includes(x)) return <St.NameBox key={x}>{x}</St.NameBox>;
           })}
       </St.FollowerWrapper>
+      <St.Button onClick={handle_moveToFollow}>팔로우하러가기</St.Button>
     </St.GetWrapper>
   );
 }

@@ -35,3 +35,15 @@ export const NameBox = styled.p`
   background-color: ${({ theme }) => theme.colors.skyblue};
   ${({ theme }) => theme.fonts.text}
 `;
+
+export const Button = styled.button`
+  width: 25rem;
+  height: 5rem;
+
+  margin: 1rem 0;
+
+  border-radius: 10rem;
+
+  background-color: ${({ theme }) => theme.colors.blue};
+  ${({ theme }) => theme.fonts.button};
+`;
