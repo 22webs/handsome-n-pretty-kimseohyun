@@ -15,7 +15,7 @@ export const Title = styled.h1`
   ${({ theme }) => theme.fonts.title}
 `;
 
-export const NameBox = styled.p`
+export const NameBox = styled.p<{ $isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,10 +24,13 @@ export const NameBox = styled.p`
   padding: 1rem;
   margin: 1rem;
 
+  border: 1px solid ${({ $isSelected, theme }) => ($isSelected ? theme.colors.blue : theme.colors.skyblue)};
   border-radius: 3rem;
 
   background-color: ${({ theme }) => theme.colors.skyblue};
   ${({ theme }) => theme.fonts.text}
+
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
