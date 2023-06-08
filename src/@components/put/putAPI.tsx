@@ -9,12 +9,16 @@ export default function PutAPI() {
   const [readyToFollowData, setReadyToFollowData] = useState<string[]>([]);
 
   const handle_selectName = (user: string) => {
-    if (readyToFollowData.includes(user)) {
+    if (check_isSelected(user)) {
       const removedData = readyToFollowData.filter((data) => data !== user);
       setReadyToFollowData(removedData);
     } else {
       setReadyToFollowData([...readyToFollowData, user]);
     }
+  };
+
+  const check_isSelected = (user: string) => {
+    return readyToFollowData.includes(user);
   };
 
   return (
@@ -24,7 +28,7 @@ export default function PutAPI() {
         followers.map((user) => {
           if (!followings.includes(user))
             return (
-              <St.NameBox key={user} onClick={() => handle_selectName(user)}>
+              <St.NameBox key={user} onClick={() => handle_selectName(user)} $isSelected={check_isSelected(user)}>
                 {user}
               </St.NameBox>
             );
