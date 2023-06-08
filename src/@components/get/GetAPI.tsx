@@ -1,20 +1,24 @@
 import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userData } from '../../reocil/user';
+import { UserDataType } from '../../types/userInfoType';
 import * as St from './style';
 
 function GetAPI() {
   const [followers, setFollowers] = useState<string[]>([]);
   const [followings, setFollowings] = useState<string[]>([]);
+  const userInfo = useRecoilValue<UserDataType>(userData);
 
   const func = async () => {
     const octokit = new Octokit({
-      auth: import.meta.env.VITE_APP_GITHUB_PAT,
+      // auth: import.meta.env.VITE_APP_GITHUB_PAT,
+      auth: `${userInfo?.PAT}`,
     });
 
     await octokit
       .request('GET /users/{username}/followers', {
-        // username: 'Geun-Oh',
-        username: 'seojisoosoo',
+        username: `${userInfo?.userName}`,
         headers: {
           'X-GitHub-Api-Version': '2022-11-28',
         },
