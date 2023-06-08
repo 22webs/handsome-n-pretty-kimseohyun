@@ -1,16 +1,15 @@
 import { Octokit } from '@octokit/core';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { notFollowing } from '../../reocil/followingData';
+import { followersData, followingData } from '../../reocil/followingData';
 import { userData } from '../../reocil/user';
 import { UserDataType } from '../../types/userInfoType';
 import * as St from './style';
 
 function GetAPI() {
-  const [followers, setFollowers] = useState<string[]>([]);
-  const [followings, setFollowings] = useState<string[]>([]);
+  const [followers, setFollowers] = useRecoilState<string[]>(followersData);
+  const [followings, setFollowings] = useRecoilState<string[]>(followingData);
   const userInfo = useRecoilValue<UserDataType>(userData);
-  const [notFollowingData, setNotFollowingData] = useRecoilState<string[]>(notFollowing);
 
   const func = async () => {
     const octokit = new Octokit({

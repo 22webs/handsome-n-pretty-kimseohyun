@@ -1,6 +1,11 @@
 import { atom } from 'recoil';
 
-export const notFollowing = atom<string[]>({
-  key: 'notFollowing',
+export const followersData = atom<string[]>({
+  key: 'followersData',
+  default: [],
+});
+
+export const followingData = atom<string[]>({
+  key: 'followingData',
   default: [],
 });
