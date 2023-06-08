@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { followUsers } from '../../api/put';
@@ -10,9 +10,27 @@ import * as St from './style';
 export default function PutAPI() {
   const followers = useRecoilValue<string[]>(followersData);
   const followings = useRecoilValue<string[]>(followingData);
+  const [notFollowingData, setNowFollowingData] = useState<string[]>([]);
   const [readyToFollowData, setReadyToFollowData] = useState<string[]>([]);
   const userInfo = useRecoilValue<UserDataType>(userData);
   const { PAT } = userInfo;
+
+  const check_notFollowUsers = () => {
+    const data: string[] = [];
+    {
+      followers.length > 1 &&
+        followers.map((user) => {
+          if (!followings.includes(user) && !data.includes(user)) {
+            data.push(user);
+          }
+        });
+    }
+    setNowFollowingData(data);
+  };
+
+  useEffect(() => {
+    check_notFollowUsers();
+  }, []);
 
   const handle_selectName = (user: string) => {
     if (check_isSelected(user)) {
@@ -40,7 +58,9 @@ export default function PutAPI() {
     readyToFollowData.map((userName) => followNotFollowingUser({ userName, PAT }));
   };
 
-  const handle_FollowAll = () => {};
+  const handle_FollowAll = () => {
+    notFollowingData.map((userName) => followNotFollowingUser({ userName, PAT }));
+  };
 
   return (
     <St.FollowerWrapper>
