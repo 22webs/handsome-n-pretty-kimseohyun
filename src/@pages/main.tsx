@@ -6,18 +6,19 @@ import * as St from './style';
 
 export default function Main() {
   const navigate = useNavigate();
-  const [data, setData] = useRecoilState<UserDataType>(userData);
+  const [userInfo, setUserInfo] = useRecoilState<UserDataType>(userData);
+  const [];
 
   const handleMoveToPage = (page: string) => {
     navigate(page);
   };
 
   const handleInputUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, userName: e.target.value });
+    setUserInfo({ ...userInfo, userName: e.target.value });
   };
 
   const handleInputPAT = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, PAT: e.target.value });
+    setUserInfo({ ...userInfo, PAT: e.target.value });
   };
 
   return (
