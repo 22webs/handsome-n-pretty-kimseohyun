@@ -13,7 +13,8 @@ function GetAPI() {
 
     await octokit
       .request('GET /users/{username}/followers', {
-        username: 'Geun-Oh',
+        // username: 'Geun-Oh',
+        username: 'seojisoosoo',
         headers: {
           'X-GitHub-Api-Version': '2022-11-28',
         },
@@ -46,29 +47,29 @@ function GetAPI() {
   return (
     <St.GetWrapper>
       <St.FollowerWrapper>
-        나를 팔로우하는 사람
+        <St.Title>나를 팔로우하는 사람</St.Title>
         {followers.map((x) => (
-          <p key={x}>{x}</p>
+          <St.NameBox key={x}>{x}</St.NameBox>
         ))}
       </St.FollowerWrapper>
       <St.FollowerWrapper>
-        내가 팔로잉하는 사람
+        <St.Title>내가 팔로잉하는 사람</St.Title>
         {followings.map((x) => (
-          <h2 key={x}>{x}</h2>
+          <St.NameBox key={x}>{x}</St.NameBox>
         ))}
       </St.FollowerWrapper>
       <St.FollowerWrapper>
-        내가 팔로우하지만 나를 팔로잉하지 않는 사람
+        <St.Title>내가 팔로우하지만 나를 팔로잉하지 않는 사람</St.Title>
         {followings.length > 1 &&
           followings.map((x) => {
-            if (!followers.includes(x)) return <h2 key={x}>{x}</h2>;
+            if (!followers.includes(x)) return <St.NameBox key={x}>{x}</St.NameBox>;
           })}
       </St.FollowerWrapper>
       <St.FollowerWrapper>
-        나를 팔로잉하지만 내가 팔로우하지 않는 사람
+        <St.Title>나를 팔로잉하지만 내가 팔로우하지 않는 사람</St.Title>
         {followers.length > 1 &&
           followers.map((x) => {
-            if (!followings.includes(x)) return <h2 key={x}>{x}</h2>;
+            if (!followings.includes(x)) return <St.NameBox key={x}>{x}</St.NameBox>;
           })}
       </St.FollowerWrapper>
     </St.GetWrapper>
