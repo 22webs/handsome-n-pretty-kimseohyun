@@ -35,13 +35,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     touch-action: manipulation;
     line-height: 1;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100vh;
   }
   menu, ol, ul {
     list-style: none;

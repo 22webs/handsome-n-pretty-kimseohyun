@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
+import * as St from './style';
 
 function GetAPI() {
   const [followers, setFollowers] = useState<string[]>([]);
@@ -43,34 +44,34 @@ function GetAPI() {
   }, []);
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div>
+    <St.GetWrapper>
+      <St.FollowerWrapper>
         나를 팔로우하는 사람
         {followers.map((x) => (
           <p key={x}>{x}</p>
         ))}
-      </div>
-      <div>
+      </St.FollowerWrapper>
+      <St.FollowerWrapper>
         내가 팔로잉하는 사람
         {followings.map((x) => (
           <h2 key={x}>{x}</h2>
         ))}
-      </div>
-      <div>
+      </St.FollowerWrapper>
+      <St.FollowerWrapper>
         내가 팔로우하지만 나를 팔로잉하지 않는 사람
         {followings.length > 1 &&
           followings.map((x) => {
             if (!followers.includes(x)) return <h2 key={x}>{x}</h2>;
           })}
-      </div>
-      <div>
+      </St.FollowerWrapper>
+      <St.FollowerWrapper>
         나를 팔로잉하지만 내가 팔로우하지 않는 사람
         {followers.length > 1 &&
           followers.map((x) => {
             if (!followings.includes(x)) return <h2 key={x}>{x}</h2>;
           })}
-      </div>
-    </div>
+      </St.FollowerWrapper>
+    </St.GetWrapper>
   );
 }
 
