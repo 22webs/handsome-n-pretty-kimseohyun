@@ -7,7 +7,6 @@ import * as St from './style';
 export default function Main() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState<UserDataType>(userData);
-  const [];
 
   const handleMoveToPage = (page: string) => {
     navigate(page);
