@@ -11,12 +11,13 @@ import * as St from './style';
 export default function PutAPI() {
   const followers = useRecoilValue<string[]>(followersData);
   const followings = useRecoilValue<string[]>(followingData);
-  const [notFollowingData, setNowFollowingData] = useState<string[]>([]);
+  const [notFollowingData, setNotFollowingData] = useState<string[]>([]);
   const [readyToFollowData, setReadyToFollowData] = useState<string[]>([]);
   const userInfo = useRecoilValue<UserDataType>(userData);
   const { PAT } = userInfo;
   const navigate = useNavigate();
 
+  //맞팔이 아닌 유저를 notFollowingData에 넣는 함수
   const check_notFollowUsers = () => {
     const data: string[] = [];
     {
@@ -27,13 +28,14 @@ export default function PutAPI() {
           }
         });
     }
-    setNowFollowingData(data);
+    setNotFollowingData(data);
   };
 
   useEffect(() => {
     check_notFollowUsers();
   }, []);
 
+  //버튼을 클릭해서 선택
   const handle_selectName = (user: string) => {
     if (check_isSelected(user)) {
       const removedData = readyToFollowData.filter((data) => data !== user);
@@ -47,6 +49,7 @@ export default function PutAPI() {
     return readyToFollowData.includes(user);
   };
 
+  //업데이트 함수
   const { mutate: followNotFollowingUser } = useMutation(followUsers, {
     onSuccess: () => {
       alert('팔로우되었습니다.');
@@ -57,10 +60,12 @@ export default function PutAPI() {
     },
   });
 
+  //클릭한 유저만 팔로우
   const handle_Follow = () => {
     readyToFollowData.map((userName) => followNotFollowingUser({ userName, PAT }));
   };
 
+  //맞팔이 아닌 사람 전체 팔로우
   const handle_FollowAll = () => {
     notFollowingData.map((userName) => followNotFollowingUser({ userName, PAT }));
   };
