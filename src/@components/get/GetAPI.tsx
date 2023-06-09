@@ -14,6 +14,8 @@ function GetAPI() {
   const navigate = useNavigate();
 
   const func = async () => {
+    setFollowers([]);
+    setFollowings([]);
     const octokit = new Octokit({
       // auth: import.meta.env.VITE_APP_GITHUB_PAT,
       auth: `${userInfo?.PAT}`,
@@ -28,6 +30,7 @@ function GetAPI() {
       })
       .then((res) => {
         const { data } = res;
+
         for (let i = 0; i < data.length; i++) {
           if (!followers.includes(data[i].login)) setFollowers((prev) => prev.concat(data[i].login));
         }
@@ -41,6 +44,8 @@ function GetAPI() {
       })
       .then((res) => {
         const { data } = res;
+
+        console.log(data);
         for (let i = 0; i < data.length; i++) {
           if (!followings.includes(data[i].login)) setFollowings((prev) => prev.concat(data[i].login));
         }

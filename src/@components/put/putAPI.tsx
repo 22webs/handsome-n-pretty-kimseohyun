@@ -55,7 +55,8 @@ export default function PutAPI() {
       alert('팔로우되었습니다.');
       navigate('/');
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       alert('팔로우에 실패하였습니다.');
     },
   });
