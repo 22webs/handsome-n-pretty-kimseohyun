@@ -4,7 +4,7 @@ import { userData } from '../state/user';
 import { UserDataType } from '../types/userDataType';
 import * as St from './style';
 
-export default function Main() {
+export default function MainPage() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState<UserDataType>(userData);
 

@@ -5,10 +5,10 @@ import { useRecoilValue } from 'recoil';
 import { followUsers } from '../../api/put';
 import { followersData, followingData } from '../../state/followingData';
 import { userData } from '../../state/user';
-import { UserDataType } from '../../types/userInfoType';
+import { UserDataType } from '../../types/userDataType';
 import * as St from './style';
 
-export default function PutAPI() {
+export default function FollowUser() {
   const followers = useRecoilValue<string[]>(followersData);
   const followings = useRecoilValue<string[]>(followingData);
   const [notFollowingData, setNotFollowingData] = useState<string[]>([]);

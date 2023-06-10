@@ -5,10 +5,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { getFollowers, getFollowings } from '../../api/get';
 import { followersData, followingData } from '../../state/followingData';
 import { userData } from '../../state/user';
-import { UserDataType } from '../../types/userInfoType';
+import { UserDataType } from '../../types/userDataType';
 import * as St from './style';
 
-function GetAPI() {
+export default function FindFollows() {
   const userInfo = useRecoilValue<UserDataType>(userData);
   const [followers, setFollowers] = useRecoilState(followersData);
   const [followings, setFollowings] = useRecoilState(followingData);
@@ -64,5 +64,3 @@ function GetAPI() {
     </>
   );
 }
-
-export default GetAPI;
