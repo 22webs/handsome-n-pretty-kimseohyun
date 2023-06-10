@@ -63,10 +63,10 @@ export const GlobalStyle = createGlobalStyle`
     
     scroll-behavior: smooth;
 
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     font-size: 62.5%;
-    user-select: none;    
-
+    user-select: none;
+   
   }
   ul, li {
     padding-left: 0rem;

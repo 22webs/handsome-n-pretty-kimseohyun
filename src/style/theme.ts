@@ -1,6 +1,10 @@
 import { DefaultTheme } from 'styled-components';
 
 const colors = {
+  skyblue: '#E9F3FF',
+  blue: '#A6C7EF',
+  grey: '#B4B4B4',
+  black: '#000000',
   MAIN: '#FCAF16',
   WHITEYELLOW: '#FCF9EB',
   GREEM: '#BAEAAE',
@@ -29,9 +33,9 @@ function FONT({ weight, size, lineHeight }: Font): string {
 }
 
 const fonts = {
-  title: FONT({ weight: 400, size: 8, lineHeight: 5 }),
-  text: FONT({ weight: 400, size: 5, lineHeight: 5 }),
-  button: FONT({ weight: 400, size: 4.5, lineHeight: 5 }),
+  title: FONT({ weight: 400, size: 3, lineHeight: 5 }),
+  text: FONT({ weight: 400, size: 1, lineHeight: 5 }),
+  button: FONT({ weight: 400, size: 2, lineHeight: 5 }),
 };
 
 export type FontsTypes = typeof fonts;

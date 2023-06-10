@@ -1,3 +1,5 @@
+import PutAPI from '../@components/put/putAPI';
+
 export default function Put() {
-  return <div>put</div>;
+  return <PutAPI />;
 }
