@@ -12,6 +12,7 @@ export default function Main() {
     navigate(page);
   };
 
+  // 요기는 이벤트 위임으로 처리하도록 변경하기 !!!
   const handle_inputUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, userName: e.target.value });
   };
