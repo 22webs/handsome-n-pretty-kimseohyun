@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserDataType } from '../types/userInfoType';
+import { UserDataType } from '../types/userDataType';
 
 export function getFollowings({ userName, PAT }: UserDataType) {
   return axios
