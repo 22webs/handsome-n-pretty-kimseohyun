@@ -6,6 +6,7 @@ import { userData } from '../../reocil/user';
 import { UserDataType } from '../../types/userInfoType';
 import * as St from './style';
 import { getFollowers, getFollowings } from '../../api/get';
+import { useQueries, useQuery } from 'react-query';
 
 function GetAPI() {
   const userInfo = useRecoilValue<UserDataType>(userData);
@@ -13,10 +14,15 @@ function GetAPI() {
   const [followings, setFollowings] = useRecoilState(followingData);
   const navigate = useNavigate();
 
+  const [{ data: queriedFollowingsData }, { data: queriedFollowersData }] = useQueries([
+    { queryKey: ['getFollowingData', userInfo], queryFn: () => getFollowings(userInfo) },
+    { queryKey: ['getFollowersData', userInfo], queryFn: () => getFollowers(userInfo) },
+  ]);
+
   useEffect(() => {
-    getFollowings(userInfo).then((res) => setFollowings(res!));
-    getFollowers(userInfo).then((res) => setFollowers(res!));
-  }, [userInfo]);
+    setFollowings(queriedFollowingsData!);
+    setFollowers(queriedFollowersData!);
+  }, [queriedFollowingsData, queriedFollowersData]);
 
   const handle_moveToFollow = () => {
     navigate('/put');
