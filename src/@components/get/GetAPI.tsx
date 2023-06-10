@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
+import { useQueries } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { followersData, followingData } from '../../reocil/followingData';
-import { userData } from '../../reocil/user';
+import { getFollowers, getFollowings } from '../../api/get';
+import { followersData, followingData } from '../../state/followingData';
+import { userData } from '../../state/user';
 import { UserDataType } from '../../types/userInfoType';
 import * as St from './style';
-import { getFollowers, getFollowings } from '../../api/get';
-import { useQueries, useQuery } from 'react-query';
 
 function GetAPI() {
   const userInfo = useRecoilValue<UserDataType>(userData);
