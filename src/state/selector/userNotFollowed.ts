@@ -2,7 +2,7 @@ import { selector } from 'recoil';
 import { followersData, followingData } from '../atom/followingData';
 
 export const userNotFollowed = selector({
-  key: 'userNotFollowing',
+  key: 'userNotFollowed',
   get: ({ get }) => {
     const following = get(followingData);
     const followers = get(followersData);
