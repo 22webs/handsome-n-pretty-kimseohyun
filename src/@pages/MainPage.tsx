@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { userData } from '../state/user';
+import { userData } from '../state/atom/user';
 import { UserDataType } from '../types/userDataType';
 import * as St from './style';
 
