@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQueries } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getFollowers, getFollowings } from '../../api/get';
@@ -25,7 +25,7 @@ export default function FindFollows() {
   }, [queriedFollowingsData, queriedFollowersData]);
 
   const handle_moveToFollow = () => {
-    navigate('/put');
+    navigate('/follow-users');
   };
 
   return (
