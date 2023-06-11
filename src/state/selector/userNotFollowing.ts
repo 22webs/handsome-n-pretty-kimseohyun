@@ -7,7 +7,7 @@ export const userNotFollowing = selector({
     const following = get(followingData);
     const followers = get(followersData);
 
-    const result = followers.filter((follower) => !following.includes(follower));
+    const result = following && followers && followers.filter((follower) => !following.includes(follower));
 
     return result;
   },
