@@ -3,8 +3,8 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { followUsers } from '../../api/put';
-import { followersData, followingData } from '../../state/followingData';
-import { userData } from '../../state/user';
+import { followersData, followingData } from '../../state/atom/followingData';
+import { userData } from '../../state/atom/user';
 import { UserDataType } from '../../types/userDataType';
 import * as St from './style';
 
