@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { followUsers } from '../../api/put';
-// import { followersData, followingData } from '../../state/atom/followingData';
+import LoadingPage from '../../pages/LoadingPage';
 import { userData } from '../../state/atom/user';
 import { userNotFollowing } from '../../state/selector/userNotFollowing';
 import { UserDataType } from '../../types/userDataType';
@@ -15,6 +15,10 @@ export default function FollowUser() {
   const userInfo = useRecoilValue<UserDataType>(userData);
   const { PAT } = userInfo;
   const navigate = useNavigate();
+  const [successCounting, setSuccessCounting] = useState({
+    now: 0,
+    total: 0,
+  });
 
   //버튼을 클릭해서 선택
   const handle_selectName = (user: string) => {
@@ -31,10 +35,14 @@ export default function FollowUser() {
   };
 
   //업데이트 함수
-  const { mutate: followNotFollowingUser } = useMutation(followUsers, {
+  const { mutate: followNotFollowingUser, isLoading } = useMutation(followUsers, {
     onSuccess: () => {
-      alert('팔로우되었습니다.');
-      navigate('/');
+      //모두 다 팔로우된 경우에만 팔로우되도록
+      if (successCounting.now === successCounting.total) {
+        alert('팔로우되었습니다.');
+        navigate('/');
+        setSuccessCounting({ now: 0, total: 0 });
+      }
     },
     onError: (error) => {
       console.log(error);
@@ -44,13 +52,40 @@ export default function FollowUser() {
 
   //클릭한 유저만 팔로우
   const handle_Follow = () => {
-    readyToFollowData.map((userName) => followNotFollowingUser({ userName, PAT }));
+    const readyFollows: string[] = [];
+    readyToFollowData.map((userName) => readyFollows.push(userName));
+    setSuccessCounting({ ...successCounting, total: readyFollows.length });
+
+    followPromiseAll(readyFollows);
   };
 
   //맞팔이 아닌 사람 전체 팔로우
   const handle_FollowAll = () => {
-    notFollowing.map((userName) => followNotFollowingUser({ userName, PAT }));
+    const notFollows: string[] = [];
+    notFollowing.map((userName) => notFollows.push(userName));
+
+    setSuccessCounting({ ...successCounting, total: notFollows.length });
+
+    followPromiseAll(notFollows);
   };
+
+  //한번에 팔로우하는 로직
+  const followPromiseAll = (followData: string[]) => {
+    Promise.allSettled(followData.map((userName) => followNotFollowingUser({ userName, PAT }))).then((results) => {
+      results.forEach((result, num) => {
+        if (result.status == 'fulfilled') {
+          setSuccessCounting({ ...successCounting, now: successCounting.now + 1 });
+        }
+        if (result.status == 'rejected') {
+          alert(`${followData[num]}: ${result.reason}`);
+        }
+      });
+    });
+  };
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <St.FollowerWrapper>
