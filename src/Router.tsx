@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import FindFollowsPage from './@pages/FindFollowsPage';
-import FollowUsersPage from './@pages/FollowUsersPage';
-import MainPage from './@pages/MainPage';
+import FindFollowsPage from './pages/FindFollowsPage';
+import FollowUsersPage from './pages/FollowUsersPage';
+import MainPage from './pages/MainPage';
 
 export default function Router() {
   return (

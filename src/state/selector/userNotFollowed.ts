@@ -1,0 +1,14 @@
+import { selector } from 'recoil';
+import { followersData, followingData } from '../atom/followingData';
+
+export const userNotFollowed = selector({
+  key: 'userNotFollowed',
+  get: ({ get }) => {
+    const following = get(followingData);
+    const followers = get(followersData);
+
+    const result = following && followers && following.filter((indivFollowing) => !followers.includes(indivFollowing));
+
+    return result;
+  },
+});
