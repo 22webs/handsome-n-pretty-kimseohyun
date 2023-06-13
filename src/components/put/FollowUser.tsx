@@ -21,8 +21,8 @@ export default function FollowUser() {
   });
 
   //버튼을 클릭해서 선택
-  const handle_selectName = (user: string) => {
-    if (check_isSelected(user)) {
+  const handleSelectName = (user: string) => {
+    if (checkIsSelected(user)) {
       const removedData = readyToFollowData.filter((data) => data !== user);
       setReadyToFollowData(removedData);
     } else {
@@ -30,7 +30,7 @@ export default function FollowUser() {
     }
   };
 
-  const check_isSelected = (user: string) => {
+  const checkIsSelected = (user: string) => {
     return readyToFollowData.includes(user);
   };
 
@@ -51,7 +51,7 @@ export default function FollowUser() {
   });
 
   //클릭한 유저만 팔로우
-  const handle_Follow = () => {
+  const handleFollow = () => {
     const readyFollows: string[] = [];
     readyToFollowData.map((userName) => readyFollows.push(userName));
     setSuccessCounting({ ...successCounting, total: readyFollows.length });
@@ -60,7 +60,7 @@ export default function FollowUser() {
   };
 
   //맞팔이 아닌 사람 전체 팔로우
-  const handle_FollowAll = () => {
+  const handleFollowAll = () => {
     const notFollows: string[] = [];
     notFollowing.map((userName) => notFollows.push(userName));
 
@@ -92,14 +92,14 @@ export default function FollowUser() {
       <St.Title>유저 이름을 클릭해서 팔로우하거나, 모두 팔로우하기를 눌러주세요.</St.Title>
       {notFollowing.map((user) => {
         return (
-          <St.NameBox key={user} onClick={() => handle_selectName(user)} $isSelected={check_isSelected(user)}>
+          <St.NameBox key={user} onClick={() => handleSelectName(user)} $isSelected={checkIsSelected(user)}>
             {user}
           </St.NameBox>
         );
       })}
 
-      <St.Button onClick={handle_Follow}>팔로우하기</St.Button>
-      <St.Button onClick={handle_FollowAll}>모두 팔로우하기</St.Button>
+      <St.Button onClick={handleFollow}>팔로우하기</St.Button>
+      <St.Button onClick={handleFollowAll}>모두 팔로우하기</St.Button>
     </St.FollowerWrapper>
   );
 }
