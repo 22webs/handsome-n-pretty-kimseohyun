@@ -5,37 +5,16 @@ import { useRecoilValue } from 'recoil';
 import { followUsers } from '../../api/put';
 // import { followersData, followingData } from '../../state/atom/followingData';
 import { userData } from '../../state/atom/user';
+import { userNotFollowing } from '../../state/selector/userNotFollowing';
 import { UserDataType } from '../../types/userDataType';
 import * as St from './style';
-import { userNotFollowing } from '../../state/selector/userNotFollowing';
 
 export default function FollowUser() {
-  // const followers = useRecoilValue<string[]>(followersData);
-  // const followings = useRecoilValue<string[]>(followingData);
-  // const [notFollowingData, setNotFollowingData] = useState<string[]>([]);
   const [readyToFollowData, setReadyToFollowData] = useState<string[]>([]);
   const notFollowing = useRecoilValue(userNotFollowing);
   const userInfo = useRecoilValue<UserDataType>(userData);
   const { PAT } = userInfo;
   const navigate = useNavigate();
-
-  //맞팔이 아닌 유저를 notFollowingData에 넣는 함수
-  // const check_notFollowUsers = () => {
-  //   const data: string[] = [];
-  //   {
-  //     followers.length > 1 &&
-  //       followers.map((user) => {
-  //         if (!followings.includes(user) && !data.includes(user)) {
-  //           data.push(user);
-  //         }
-  //       });
-  //   }
-  //   setNotFollowingData(data);
-  // };
-
-  // useEffect(() => {
-  //   check_notFollowUsers();
-  // }, []);
 
   //버튼을 클릭해서 선택
   const handle_selectName = (user: string) => {
